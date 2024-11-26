@@ -1,6 +1,12 @@
 local config = require('nvim_context_vt.config')
 local M = {}
 
+local logger = require("logging"):new({
+   level_name = "debug",
+   plugin_name = "context_vt",
+   save_logs = true,
+})
+
 -- This is from nvim-treesitter
 function M.get_node_text(node, bufnr)
     bufnr = bufnr or vim.api.nvim_get_current_buf()
@@ -65,8 +71,10 @@ M.find_virtual_text_nodes = function(validator, ft, opts)
             table.insert(result[target_line], node)
         end
 
+        logger:info(node:type())
         local pnode = node:parent()
         if pnode == node then
+            logger:warn("break")
             -- in case of dead loop
             break
         else
