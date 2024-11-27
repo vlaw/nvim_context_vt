@@ -74,7 +74,7 @@ M.find_virtual_text_nodes = function(validator, ft, opts)
         logger:info(node:type())
         local pnode = node:parent()
         if pnode == node then
-            logger:warn("break")
+            logger:warn("break!!!")
             -- in case of dead loop
             break
         else
